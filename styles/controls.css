@@ -1,0 +1,14 @@
+#controls {
+  width: 60em;
+  float: left;
+}
+#html-source{
+  height: 30em;
+  width: 100%;
+  max-width: 80em;
+  display: block;
+}
+#results {
+  float: left;
+  padding: 1em;
+}

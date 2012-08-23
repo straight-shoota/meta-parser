@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# fb: http://fb.me/ns">
+  <head>
+    <title>Metadata Test Dokument</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="styles/entities.css" />
+
+    <link rel="schema.DC"      href="http://purl.org/dc/elements/1.1/">
+    <link rel="schema.DCTERMS" href="http://purl.org/dc/terms/">
+    <meta name="DC.title"       content="Auswertung von Meta- und Microdaten in HTML5">
+    <meta name="DC.creator"     content="Johannes Müller">
+    <meta name="DC.subject"     content="Metadaten">
+    <meta name="DC.description" content="Implementierung eines Metadaten-Parsers in Javascrript">
+    <meta name="DC.date"        content="2012-08-30">
+    <meta name="DC.identifier"  content="http://straight-shoota.de/bachelorthesis" scheme="DCTERMS.URI">
+    <meta name="DC.type"        content="Text" scheme="DCTERMS.DCMIType">
+    <meta name="DC.format"      content="text/html" scheme="DCTERMS.IMT">
+    <meta name="DC.language"    content="de" scheme="DCTERMS.RFC3066">
+    <meta name="DC.rights"      content="Alle Rechte liegen beim Autor">
+    <!-- Basiseigenschaften -->
+    <meta property="og:title"  content="Auswertung von Meta- und Microdaten in HTML5">
+    <meta property="og:type"   content="article">
+    <meta property="og:url"    content="http://straight-shoota.de/bachelorthesis">
+    <meta property="og:image"  content="http://straight-shoota.de/bachelorthesis/title.png">
+    <!-- optionale allgemeine Eigenschaften -->
+    <meta property="og:locale"      content="de_DE">
+    <meta property="og:description" content="Bachelorthesis zum Thema Meta- und Microdaten in HTML5. Vergleich verschiedener Metadatenformate">
+    <!-- typspezifische Eigenschaften -->
+    <meta property="og:author"         content="Johannes Müller">
+    <meta property="og:published_time" content="2012-08-30">
+  </head>
+  <body>
+    <div itemscope itemtype="TestObject">
+      <a href="#test1" itemprop="url"><span itemprop="name">TestObject1</span></a>
+      <p itemprop="description">Hallo text</p>
+      <p itemprop="description">Hallo Welt</p>
+      <p itemprop="description">Hallo Onkel</p>
+      <div itemprop="img" itemscope itemtype="Image" itemid="img:test.jpg">
+        <img src="test.jpg" itemprop="url" />
+        <p itemprop="catption">Caption</p>
+        <p itemprop="license" itemscope>
+          Licensed under <span itemprop="license">CC-by-sa</span>
+        </p>
+      </div>
+    </div>
+
+    <address class="vcard">
+      <strong class="fn org">Hochschule Fulda</strong>
+      <span class="adr">
+        <span class="street-address">Marquardstr. 35</span>
+        <span class="postal-code">36039</span> <span class="locality">Fulda</span>
+        <span class="country-name">Deutschland</span>
+      </span>
+      Internet: <a class="url" href="http://www.hs-fulda.de">www.hs-fulda.de</a>
+    </address>
+
+    <p vocab="http://schema.org/" prefix="ov: http://open.vocab.org/terms/" resource="#manu" typeof="Person">
+       My name is
+       <a rel="mail" href="mailto:manu.sporny@gmail.com"><span property="name">Manu Sporny</span></a>
+       and you can give me a ring via
+       <span property="telephone">1-800-555-0199</span>.
+       <img property="image" src="http://manu.sporny.org/images/manu.png" />
+       My favorite animal is the <span property="ov:preferredAnimal">Liger</span>.
+    </p>
+
+    <div id="results"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="scripts/metadata.js"></script>
+    <script src="scripts/entity.js"></script>
+    <script src="scripts/metadata/microdata.js"></script>
+    <script src="scripts/metadata/microformat.js"></script>
+    <script src="scripts/metadata/microformat/hcard.js"></script>
+    <script src="scripts/metadata/rdfa.js"></script>
+    <script src="scripts/metadata/head-meta.js"></script>
+    <script>
+
+    $(document).ready(function(){
+      function parseHTML(html){
+        var items = MetaParser.getEntities(html);
+        var results = $('#results')
+        results.html("")
+        $.each(items, function(){
+          results.append(this.inspect());
+        })
+      }
+      parseHTML($(document));
+    })
+    /*var microdata = new MetaParser.Microdata();
+    items = microdata.getItems()
+    console.log("items:", items)
+    items.each(function(){
+      var entity = microdata.getEntity(this)
+      //console.log(entity)
+      //console.log(JSON.stringify(entity))
+      $('#result').append(entity.inspect())
+    })
+    var hcard = new MetaParser.HCard();
+    items = hcard.getItems()
+    console.log("items:", items)
+    items.each(function(){
+      //console.log(MetaParser.getProperties(MetaParser.Microdata, this))
+      var entity = hcard.getEntity(this)
+      //console.log(entity.inspect())
+      $('#result').append(entity.inspect())
+    })
+    var rdfa = new MetaParser.RDFa();
+    items = rdfa.getItems()
+    console.log("items:", items)
+    items.each(function(){
+      //console.log(MetaParser.getProperties(MetaParser.Microdata, this))
+      var entity = rdfa.getEntity(this)
+      //console.log(entity.inspect())
+      $('#result').append(entity.inspect())
+    })*/
+    </script>
+  </body>
+</html>
