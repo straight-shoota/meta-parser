@@ -2,7 +2,6 @@ MetaParser.Microformat = {
   syntax: 'microformat',
   subProperties: {},
   properties: function(scope){
-    //console.log(this)
     return scope.find('.' + this.propertyNames.join(',.')).not(scope.find(this.base).children())
   },
   propertyKeys: function(scope){

@@ -2,7 +2,6 @@ MetaParser.createFormat('RDFa', {
   base: '[about], [typeof], html',
   syntax: 'rdfa',
   properties: function(scope){
-    //console.log('PROPERTY:', scope, scope.find('[property]'))
     return scope.find('[property],[rel],[rev]').not(scope.find(this.base).children()).not(this.base).add(scope.filter('[property],[rel],[rev]'));
   },
   propertyKeys: function(elem){

@@ -53,14 +53,11 @@ MetaParser.prototype = {
     return this.get('properties', item)
   },
   getEntity: function(item){
-    item = $(item)
+    var item = $(item)
     if(item.data('entity-' + this.syntax)){
       return false;
     }
 
-    /*if(item.length){
-      item = item[0]
-    }*/
     var entity = new Entity(this.syntax)
     item.data('entity-' + this.syntax,  entity)
 
@@ -70,13 +67,10 @@ MetaParser.prototype = {
       this.initEntity(entity, item);
     }
     console.log("getEntity", this, item, this.getProperties(item))
-    _this = this
-    p=this.getProperties(item);
-    console.log(p)
-    p.each(function(){
-      entity.add(_this.getPropertyKeys($(this)), _this.getPropertyValue($(this)))
-    })
-    console.log(entity)
+    var meta = this
+    meta.getProperties(item).each(function(){
+      entity.add(meta.getPropertyKeys($(this)), meta.getPropertyValue($(this)))
+    });
     return entity;
   },
   getEntityId: function(item){

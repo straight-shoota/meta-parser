@@ -39,29 +39,11 @@ $.extend(Entity.prototype, {
     function val(prop){
       return ((typeof prop.inspect == "function") ? prop.inspect() : prop)
     };
-    /*function kv(k,v){
-      s += '<tr><th>' + k + '</th><td>' + v + '</td></tr>'
-    }
-    if(this.type){
-      kv('type', this.type)
-    }
-    if(this.id){
-      kv('id', this.id)
-    }
-    s += '<tr class="head"><td colspan="2">'
-    s += 'properties'
-    s += '</td></tr>'*/
     $.each(this.properties, function(key, values){
       s += '<tr>';
       s += '<th rowspan="' + values.length + '">' + key + '</th>'
-      //s += '<td>'
-      //if(this.properties[key].length == 1){
-      //  s += val(this.properties[key][0]);
-      //}else{
-      //  s+= "<ul>"
         var first = true
         $.each(values, function(i, value){
-      //    s += '<li>' + val(this.properties[key][i]) + "</li>"
           if(!first){
             s += '</tr><tr>';
           }else{
@@ -69,9 +51,6 @@ $.extend(Entity.prototype, {
           }
           s += '<td>' + val(value) + "</td>"
         })
-      //  s+="</ul>"
-      //}
-      //s +='</td>'
       s += '</tr>';
     })
     s += '</tbody>'
