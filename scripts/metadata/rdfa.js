@@ -25,7 +25,7 @@ MetaParser.createFormat('RDFa', {
     return item.attr('typeof');
   },
   getEntityId: function(item){
-    return item.attr('about') || item.attr('src') || item.attr('typeof') || undefined;
+    return item.attr('about') || item.attr('resource') || item.attr('src') || item.attr('typeof') || undefined;
   },
   initEntity: function(entity, elem){
     entity.vocab = elem.attr('vocab')
