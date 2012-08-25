@@ -70,7 +70,7 @@
       }
       $('#form-source').submit(function(e){
         e.preventDefault();
-        parseHTML($('<div/>').append($('#html-source').val()))
+        parseHTML($('<div/>').append($('#html-source').val().replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')))
       })
       $('#form-url').submit(function(e){
         e.preventDefault();
