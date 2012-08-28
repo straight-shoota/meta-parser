@@ -23,7 +23,6 @@ MetaParser.getEntities = function(root){
   entities = [];
   for(i in this.Formats){
     var format = new this.Formats[i]();
-    //console.log("items:", format.getItems(root))
     $.each(format.getItems(root), function(){
       console.log("entity:", this)
       entities.push(format.getEntity(this))
@@ -34,10 +33,8 @@ MetaParser.getEntities = function(root){
 
 MetaParser.prototype = {
   initialize: function(){
-    //console.log(this)
   },
   get: function(fun, elem){
-    //console.log(fun, elem, this[fun])
     if(typeof this[fun] == 'function'){
       return this[fun](elem);
     }

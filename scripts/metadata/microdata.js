@@ -2,7 +2,8 @@ MetaParser.createFormat('Microdata', {
   syntax: 'microdata',
   base: '[itemscope]:not([itemprop])',
   properties: function(scope){
-    return scope.find('[itemprop]').not(scope.find('[itemscope]').children())
+    return scope.find('[itemprop]')
+      .not(scope.find('[itemscope]').children())
   },
   propertyKeys: function(property){
     return property.attr('itemprop').split(/ /)

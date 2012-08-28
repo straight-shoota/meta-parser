@@ -2,10 +2,16 @@ MetaParser.createFormat('RDFa', {
   base: '[about], [typeof], html',
   syntax: 'rdfa',
   properties: function(scope){
-    return scope.find('[property],[rel],[rev]').not(scope.find(this.base).children()).not(this.base).add(scope.filter('[property],[rel],[rev]'));
+    return scope.find('[property],[rel],[rev]')
+      .not(scope.find(this.base).children())
+      .not(this.base)
+      .add(scope.filter('[property],[rel],[rev]'));
   },
   propertyKeys: function(elem){
-    return $.trim([elem.attr('property'), elem.attr('rel'), elem.attr('rev')].join(' ')).split(/ +/)
+    var attrs = ['property', 'rel', 'rev'];
+    return $.trim(attrs.map(function(attr){
+      return elem.attr(attr);
+    }).join(' ')).split(/ +/)
   },
   propertyValue: function(property){
     if(content = property.attr('content')){
@@ -29,7 +35,9 @@ MetaParser.createFormat('RDFa', {
   },
   initEntity: function(entity, elem){
     entity.vocab = elem.attr('vocab')
-    var prefix = (elem.attr('prefix')||'').replace(/: +/g, '<>').split(/ /).map(function(v){return v.replace(/<>/, ': ')});
+    var prefix = (elem.attr('prefix')||'')
+      .replace(/: +/g, '<>').split(/ /)
+      .map(function(v){return v.replace(/<>/, ': ')});
     if($.trim(prefix).length > 0){
       entity.add('#prefix', prefix)
     }

@@ -2,7 +2,8 @@ MetaParser.createFormat('Meta', {
   syntax: 'head-meta',
   base: 'html',
   properties: function(scope){
-    return scope.find('head').find('title, meta[name], link[rel=meta], link[rel=alternate]');
+    return scope.find('head')
+      .find('title, meta[name], link[rel=meta], link[rel=alternate]');
   },
   propertyKeys: function(property){
     if(property.is('title')){

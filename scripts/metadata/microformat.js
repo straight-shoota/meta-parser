@@ -2,12 +2,13 @@ MetaParser.Microformat = {
   syntax: 'microformat',
   subProperties: {},
   properties: function(scope){
-    return scope.find('.' + this.propertyNames.join(',.')).not(scope.find(this.base).children())
+    return scope.find('.' + this.propertyNames.join(',.'))
+      .not(scope.find(this.base).children())
   },
   propertyKeys: function(scope){
     result = $.grep(this.propertyNames, function(e){
       return $.inArray(e, scope[0].className.split(/\s+/)) > -1 })
-  return result
+    return result
   },
   propertyValue: function(property){
     for(klass in this.subProperties) {

@@ -4,7 +4,6 @@ Entity = function(syntax){
 }
 $.extend(Entity.prototype, {
   add: function(name, val){
-    //console.log(name, val)
     if($.isArray(name)){
       for(i in name){
         this.add(name[i], val);
@@ -17,9 +16,9 @@ $.extend(Entity.prototype, {
     this.properties[name].push(val)
   },
   inspect: function(){
-    s = '<table class="entity" data-entity-format="' + this.syntax +'" data-entity-type="' + this.type + '">'
+    var s = '<table class="entity" data-entity-format="'
+      s += this.syntax +'" data-entity-type="' + this.type + '">'
     s += '<thead><tr><td colspan="2">';
-    //s += this.syntax;
     if(this.id){
       s += '<span class="entity-id">'
       s += this.id
